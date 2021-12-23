@@ -6,6 +6,8 @@ Testing exercise ISO
 - Andres Castellanos Cantos
 - Pablo Valverde Soriano
 
+This proyect has been elaborated working from @pavalso computers, so all commits come from it, but both members colaborated
+
 ## Project:
 
 ``P3`` is the maven project with the source code of the problem.
