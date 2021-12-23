@@ -3,8 +3,8 @@ Testing exercise ISO
 
 ## Authors:
 
-- Carlos Pulido Hernández
-- Alberto Quintana Algaba
+- Andres Castellanos Cantos
+- Pablo Valverde Soriano
 
 ## Project:
 
