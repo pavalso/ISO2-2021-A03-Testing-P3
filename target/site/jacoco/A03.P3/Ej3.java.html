@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Ej3.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">P3</a> &gt; <a href="index.source.html" class="el_package">A03.P3</a> &gt; <span class="el_source">Ej3.java</span></div><h1>Ej3.java</h1><pre class="source lang-java linenums">package A03.P3;
+
+import java.io.IOException;
+
+<span class="nc" id="L5">public class Ej3 {</span>
+<span class="fc" id="L6">	static int [][] FUNCTIONAL_MATRIX = {{0,0,0},{1,1,2},{2,1,2},{2,2,3},{3,3,4},{4,5,5}};</span>
+<span class="fc" id="L7">	static int [][] MAINTAINABILITY_MATRIX = {{0,0,0,0,0},{1,1,0,1,1},{2,2,1,2,1},{2,2,2,3,2},{3,3,3,4,4},{4,5,5,5,4}};</span>
+<span class="fc" id="L8">	static int [][] ADECUATION_FUNCTIONAL_MATRIX = {{1,1,1,1,1},{1,2,2,2,2},{2,2,3,3,3},{3,3,3,3,4},{3,3,4,4,5}};</span>
+<span class="fc" id="L9">	static int [] functional_input = {0,0,0};</span>
+<span class="fc" id="L10">	static int [] maintainability_input = {0,0,0,0,0};</span>
+	public static void main(String[] args) {
+		try {
+<span class="nc" id="L13">			int completeness_value = get_Value (FUNCTIONAL_MATRIX, functional_input[0], 0);</span>
+<span class="nc" id="L14">			int correcteness_value = get_Value (FUNCTIONAL_MATRIX, functional_input[1], 1);</span>
+<span class="nc" id="L15">			int appropiateness_value = get_Value (FUNCTIONAL_MATRIX, functional_input[2], 2);</span>
+<span class="nc" id="L16">			int min_functional = calculate_min_functional (completeness_value, correcteness_value, appropiateness_value);</span>
+<span class="nc" id="L17">			int modularity_value = get_Value (MAINTAINABILITY_MATRIX, maintainability_input[0], 0);</span>
+<span class="nc" id="L18">			int reusability_value = get_Value (MAINTAINABILITY_MATRIX, maintainability_input[1], 1);</span>
+<span class="nc" id="L19">			int analyzability_value = get_Value (MAINTAINABILITY_MATRIX, maintainability_input[2], 2);</span>
+<span class="nc" id="L20">			int modified_value = get_Value (MAINTAINABILITY_MATRIX, maintainability_input[3], 3);</span>
+<span class="nc" id="L21">			int tested_value = get_Value (MAINTAINABILITY_MATRIX, maintainability_input[4], 4);</span>
+<span class="nc" id="L22">			int min_maintainability = calculate_min_maintainability (modularity_value, reusability_value, analyzability_value, modified_value, tested_value);</span>
+<span class="nc" id="L23">			int value_adecuational_functional = ADECUATION_FUNCTIONAL_MATRIX [min_functional][min_maintainability];</span>
+<span class="nc" id="L24">			System.out.println(value_adecuational_functional);</span>
+<span class="nc" id="L25">		}catch(Exception e){</span>
+<span class="nc" id="L26">			System.out.println(e);</span>
+		}
+<span class="nc" id="L28">	}</span>
+	
+	public static int calculate_min_functional (int completeness_value, int correcteness_value, int appropiateness_value) {
+<span class="nc" id="L31">		return Math.min(Math.min(correcteness_value, appropiateness_value), appropiateness_value);</span>
+	}
+
+	public static int calculate_min_maintainability (int modularity_value, int reusability_value, int analyzability_value, int modified_value, int tested_value) {
+<span class="nc" id="L35">		return Math.min(Math.min(reusability_value, analyzability_value), Math.min(modified_value, Math.min(tested_value, modularity_value)));</span>
+	}
+	
+	public static int get_Value (int [][] matrix, int input, int type) throws IOException {
+<span class="nc" id="L39">		int range = get_range(input);</span>
+<span class="nc" id="L40">		int value = matrix[range][type];</span>
+<span class="nc" id="L41">		return value;</span>
+	}
+	
+	public static int get_range (int input) throws IOException {
+<span class="fc" id="L45">		int range = 0;</span>
+<span class="fc bfc" id="L46" title="All 4 branches covered.">		if (input &lt; 0 || input &gt; 100) {</span>
+<span class="fc" id="L47">			throw new IOException(&quot;Range must be from 0 to 100&quot;);</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">		} else if (input &lt; 10) {</span>
+<span class="fc" id="L49">			range = 0;	</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">		} else if (input &lt; 35) {</span>
+<span class="fc" id="L51">			range = 1;</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">		} else if (input &lt; 50) {</span>
+<span class="fc" id="L53">			range = 2;</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">		} else if (input &lt; 70) {</span>
+<span class="fc" id="L55">			range = 3;</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">		} else if (input &lt; 90) {</span>
+<span class="fc" id="L57">			range = 4;</span>
+<span class="fc" id="L58">		} else {</span>
+<span class="fc" id="L59">			range = 5;</span>
+		}
+<span class="fc" id="L61">		return range;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>
